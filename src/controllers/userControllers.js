@@ -41,7 +41,7 @@ const register = async (req, res) => {
       { userID: user._id },
       process.env.ACCESS_TOKEN_SECRET,
       {
-        expiresIn: "1h",
+        expiresIn: "1d",
       }
     );
 
@@ -62,7 +62,6 @@ const register = async (req, res) => {
       email: user.email,
       role: user.role,
     };
-// console.log(userDetails);
     return res.status(200).json({
       userDetails,
       accessToken,
@@ -102,7 +101,7 @@ const login = async (req, res) => {
       { userID: user._id },
       process.env.ACCESS_TOKEN_SECRET,
       {
-        expiresIn: "5d",
+        expiresIn: "1d",
       }
     );
     const refreshToken = jwt.sign(
@@ -120,7 +119,6 @@ const login = async (req, res) => {
       email: user.email,
       role: user.role,
     };
-    // console.log(user);
     return res.status(200).json({
       userDetails,
       accessToken,
