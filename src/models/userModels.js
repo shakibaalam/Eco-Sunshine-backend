@@ -40,6 +40,7 @@ const userSchema = new mongoose.Schema({
     type: String,
     default: "USER",
     enum: [
+      "SUPER-ADMIN",
       "ADMIN",
       "USER"
     ],
