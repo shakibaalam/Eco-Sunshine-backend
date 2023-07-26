@@ -23,11 +23,7 @@ const userSchema = new mongoose.Schema({
     required: true,
     default: Date.now,
   },
-  firstName: {
-    type: String,
-    required: [true, "first name required!"],
-  },
-  lastName: {
+  name: {
     type: String,
     required: false,
   },

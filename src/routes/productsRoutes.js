@@ -14,11 +14,11 @@ router.post("/get-product", getAllProducts);
 router.get("/get-product/:id", getAllProducts);
 
 // add to cart router
-router.post("/create-product", createAddToCart);
-router.delete("/delete-product", deleteAddToCart);
-router.patch("/update-product", UpdateAddToCart);
-router.post("/get-product", getAllAddToCart);
-router.get("/get-product/:id", getAllAddToCart);
+router.post("/add-to-cart", createAddToCart);
+router.delete("/delete-to-cart", deleteAddToCart);
+router.patch("/update-to-cart", UpdateAddToCart);
+router.post("/get-to-cart", getAllAddToCart);
+router.get("/get-to-cart", getAllAddToCart);
 
 // exporting
 export default router;

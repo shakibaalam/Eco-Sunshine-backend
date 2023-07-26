@@ -8,10 +8,10 @@ const hashPassword = async (password) => {
 };
 
 const register = async (req, res) => {
-  const { firstName, lastName, email, password, confirmPassword, role } =
+  const { name, email, password, confirmPassword, role } =
     req.body;
   try {
-    if (!email || !firstName || !lastName || !password || !confirmPassword) {
+    if (!email || !name || !password || !confirmPassword) {
       return res.status(400).json({
         message: "Please fill all the required fields",
       });
@@ -31,8 +31,7 @@ const register = async (req, res) => {
 
     const hashedPassword = await hashPassword(password);
     const user = new UserModel({
-      firstName,
-      lastName,
+      name,
       email,
       password: hashedPassword,
       role: role || "USER",
