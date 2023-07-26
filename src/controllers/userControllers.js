@@ -13,7 +13,7 @@ const register = async (req, res) => {
   try {
     if (!email || !name || !password || !confirmPassword) {
       return res.status(400).json({
-        message: "Please fill all the required fields",
+        message: "Please fill all the required fields....",
       });
     }
 
