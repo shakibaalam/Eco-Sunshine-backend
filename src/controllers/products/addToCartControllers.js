@@ -1,14 +1,17 @@
 import addToCartModel from "../../models/addToCart.js";
+import productsModel from "../../models/products.js";
 
 
 const createAddToCart = async (req, res) => {
   try {
     const product = req.params.id
+    const productsDetails = await productsModel.findById(product)
+    console.log(productsDetails);
     const user = req.user_id
     const result = new addToCartModel({
-      name: req.body.name,
-      price: req.body.price,
-      img: req.body.img,
+      name: productsDetails.name,
+      price: productsDetails.price,
+      img: productsDetails.img,
       quantity: req.body.quantity,
       user,
       product,

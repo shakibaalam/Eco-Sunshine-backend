@@ -4,12 +4,10 @@ import productsModel from "../../models/products.js";
 const createProducts = async (req, res) => {
   try {
     const result = new productsModel({
-      title: req.body.title,
+      name: req.body.name,
       img: req.body.img,
-      para: req.body.para,
-      fund: req.body.fund,
-      days: req.body.days,
-      goal: req.body.goal,
+      des: req.body.des,
+      price: req.body.price,
     });
     await result.validate();
     await result.save();
@@ -44,7 +42,7 @@ const UpdateProducts = async (req, res) => {
       { new: true }
     );
     if (!visitorBook) {
-      return res.status(404).send({ error: "Visitor book not found" });
+      return res.status(404).send({ error: "product book not found" });
     }
     return res.send(visitorBook);
   } catch (error) {

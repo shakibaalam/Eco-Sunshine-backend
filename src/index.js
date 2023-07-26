@@ -6,6 +6,7 @@ import connectDB from "./configs/databaseConfigs.js";
 import userRoutes from "./routes/userRoutes.js";
 import productRoutes from "./routes/productsRoutes.js";
 import donationRoutes from "./routes/donationRoutes.js";
+import blogRoutes from "./routes/blogRoutes.js";
 // Application
 const app = express();
 dotenv.config();
@@ -25,6 +26,7 @@ app.get("/", (req, res) => {
 app.use("/api/v1/auth/", userRoutes);
 app.use("/api/v1/products/", productRoutes);
 app.use("/api/v1/donation/", donationRoutes);
+app.use("/api/v1/blog/", blogRoutes);
 
 // Handle Not valid routes
 app.use("*", (req, res) => {

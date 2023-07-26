@@ -2,21 +2,21 @@
 import { Router } from "express";
 import { UpdateProducts, createProducts, deleteProducts, getAllProducts } from "../controllers/donation/donationControllers.js";
 import { createCDonation, getAllCDonation } from "../controllers/donation/createDonationControllers.js";
-import { checkAuthUser,  checkSuperAdmin, checkAdmin } from "../middleware/authMiddleware.js"
+import { checkAuthUser, checkAdmin } from "../middleware/authMiddleware.js"
 // router
 const router = Router();
 
 // product router
-router.post("/create-donation", createProducts, checkAdmin);
-router.delete("/delete-donation", deleteProducts, checkAdmin);
-router.patch("/update-donation", UpdateProducts, checkAdmin);
-router.post("/get-donation", getAllProducts, checkAuthUser);
-router.get("/get-donation/:id", getAllProducts, checkAuthUser);
+router.post("/create-donation",checkAdmin, createProducts );
+router.delete("/delete-donation/:id", checkAdmin, deleteProducts);
+router.patch("/update-donation/:id",checkAdmin, UpdateProducts);
+router.get("/get-donation",checkAuthUser, getAllProducts);
+router.get("/get-donation/:id",checkAuthUser, getAllProducts);
 
 // create donation
-router.post("/create-user-donation", createCDonation, checkAuthUser);
-router.post("/get-user-donation", getAllCDonation, checkAuthUser);
-router.get("/get-user-donation/:id", getAllCDonation, checkAuthUser);
+router.post("/create-user-donation/:id",checkAuthUser, createCDonation);
+router.get("/get-user-donation",checkAuthUser, getAllCDonation);
+router.get("/get-user-donation/:id",checkAuthUser, getAllCDonation);
 
 // exporting
 export default router;
