@@ -58,12 +58,11 @@ const register = async (req, res) => {
 
     const userDetails = {
       _id: user._id,
-      firstName: user.firstName,
-      lastName: user.lastName,
+      name: user.name,
       email: user.email,
       role: user.role,
     };
-
+// console.log(userDetails);
     return res.status(200).json({
       userDetails,
       accessToken,
@@ -117,12 +116,11 @@ const login = async (req, res) => {
     await UserModel.findByIdAndUpdate(user._id);
     const userDetails = {
       _id: user._id,
-      firstName: user.firstName,
-      lastName: user.lastName,
+      name: user.name,
       email: user.email,
       role: user.role,
     };
-
+    // console.log(user);
     return res.status(200).json({
       userDetails,
       accessToken,
