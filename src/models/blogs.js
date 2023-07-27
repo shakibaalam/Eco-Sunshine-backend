@@ -27,6 +27,7 @@ const blogSchema = new mongoose.Schema({
     type: String,
     required: [true, "author name required!"],
   },
+ 
   date: {
     type: Date,
     required: true,

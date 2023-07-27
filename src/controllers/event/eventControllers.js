@@ -26,7 +26,7 @@ const getAllAddEvent = async (req, res) => {
     }
     const query = req.query.school;
     const page = parseInt(req.query.page) || 1;
-    const limit = parseInt(req.query.limit) || 2;
+    const limit = parseInt(req.query.limit) || 200;
     const startIndex = (page - 1) * limit;
     const admissionEnquiries = await addEventModel.find(
       query ? { school: query } : {}

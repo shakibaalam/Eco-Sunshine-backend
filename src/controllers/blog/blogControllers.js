@@ -1,9 +1,12 @@
 import BlogModel from "../../models/blogs.js";
+import UserModel from "../../models/userModels.js";
 
 
 
 const createBlog = async (req, res) => {
   try {
+    const user = req.user_id
+    const userDetails = await UserModel.findById(user)
     const result = new BlogModel({
       title: req.body.title,
       img: req.body.img,
@@ -11,7 +14,7 @@ const createBlog = async (req, res) => {
       date: req.body.date,
       views: req.body.views,
       comments: req.body.comments,
-      author: req.body.author,
+      author: req.body.comments,
     });
     await result.validate();
     await result.save();
@@ -62,7 +65,7 @@ const getAllBlog = async (req, res) => {
     }
     const query = req.query.school;
     const page = parseInt(req.query.page) || 1;
-    const limit = parseInt(req.query.limit) || 2;
+    const limit = parseInt(req.query.limit) || 200;
     const startIndex = (page - 1) * limit;
     const admissionEnquiries = await BlogModel.find(
       query ? { school: query } : {}
