@@ -1,7 +1,7 @@
 import mongoose from "mongoose";
 
 const blogSchema = new mongoose.Schema({
-    name: {
+    title: {
     type: String,
     required: [true, "name id required!"],
   },
@@ -19,9 +19,13 @@ const blogSchema = new mongoose.Schema({
     type: String,
     required: [true, "img name required!"],
   },
-  des: {
+  content: {
     type: String,
-    required: [true, "des name required!"],
+    required: [true, "content name required!"],
+  },
+  author: {
+    type: String,
+    required: [true, "author name required!"],
   },
   date: {
     type: Date,

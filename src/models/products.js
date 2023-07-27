@@ -26,6 +26,14 @@ const productsSchema = new mongoose.Schema({
   img: {
     type: String,
     required: [true, "img name required!"],
+  },
+  minimumQu: {
+    type: String,
+    required: [true, "minimumQu name required!"],
+  },
+  availableQu: {
+    type: String,
+    required: [true, "availableQu name required!"],
   }
 });
 

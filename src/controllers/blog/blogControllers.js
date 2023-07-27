@@ -5,12 +5,13 @@ import BlogModel from "../../models/blogs.js";
 const createBlog = async (req, res) => {
   try {
     const result = new BlogModel({
-      name: req.body.name,
+      title: req.body.title,
       img: req.body.img,
-      des: req.body.des,
+      content: req.body.content,
       date: req.body.date,
       views: req.body.views,
       comments: req.body.comments,
+      author: req.body.author,
     });
     await result.validate();
     await result.save();

@@ -129,4 +129,41 @@ const login = async (req, res) => {
   }
 };
 
-export { login, register };
+
+const getAllUser = async (req, res) => {
+  try {
+    const user = req.user_id
+    const admissionEnquiries = await UserModel.find({})
+    return res.status(200).send({
+      data: admissionEnquiries
+    });
+  } catch (error) {
+    return res.status(500).send(error.message);
+  }
+};
+
+const updateUserRole = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const { role } = req.body;
+
+    const updatedUser = await UserModel.updateOne(
+      { _id: id }, 
+      { $set: { role } }
+    );
+
+    if (updatedUser.n === 0) {
+      return res.status(404).send("User not found");
+    }
+
+    return res.status(200).send({
+      message: "User role updated successfully",
+      data: updatedUser,
+    });
+  } catch (error) {
+    return res.status(500).send(error.message);
+  }
+};
+
+
+export { login, register, getAllUser, updateUserRole };

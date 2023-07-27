@@ -1,15 +1,14 @@
-import productsModel from "../../models/products.js";
+import compaignModel from "../../models/campaign.js";
 
 
-const createProducts = async (req, res) => {
+const createCompaign = async (req, res) => {
   try {
-    const result = new productsModel({
-      name: req.body.name,
-      img: req.body.img,
+    const result = new compaignModel({
+      title: req.body.title,
       des: req.body.des,
-      price: req.body.price,
-      availableQu: req.body.availableQu,
-      minimumQu: req.body.minimumQu,
+      targetAmount: req.body.targetAmount,
+      endDate: req.body.endDate,
+      img: req.body.img,
     });
     await result.validate();
     await result.save();
@@ -19,14 +18,14 @@ const createProducts = async (req, res) => {
   }
 };
 
-const deleteProducts = async (req, res) => {
+const deleteCompaign = async (req, res) => {
   try {
-    if (!(await productsModel.findById(req.params.id))) {
+    if (!(await compaignModel.findById(req.params.id))) {
       return res.status(400).send({
         message: "Invalid Id!",
       });
     }
-    await productsModel.findByIdAndDelete(req.params.id);
+    await compaignModel.findByIdAndDelete(req.params.id);
 
     return res.status(200).send({
       message: "Success",
@@ -36,15 +35,15 @@ const deleteProducts = async (req, res) => {
     return res.status(400).send(error);
   }
 };
-const UpdateProducts = async (req, res) => {
+const UpdateCompaign = async (req, res) => {
   try {
-    const visitorBook = await productsModel.findByIdAndUpdate(
+    const visitorBook = await compaignModel.findByIdAndUpdate(
       req.params.id,
       req.body,
       { new: true }
     );
     if (!visitorBook) {
-      return res.status(404).send({ error: "product book not found" });
+      return res.status(404).send({ error: "Visitor book not found" });
     }
     return res.send(visitorBook);
   } catch (error) {
@@ -52,24 +51,24 @@ const UpdateProducts = async (req, res) => {
   }
 };
 
-const getAllProducts = async (req, res) => {
+const getAllCompaign = async (req, res) => {
   try {
     if (req.params.id) {
-      const admissionEnquiries = await productsModel.findById(req.params.id);
+      const admissionEnquiries = await compaignModel.findById(req.params.id);
       return res.status(200).send(admissionEnquiries);
     }
     const query = req.query.school;
     const page = parseInt(req.query.page) || 1;
     const limit = parseInt(req.query.limit) || 2;
     const startIndex = (page - 1) * limit;
-    const admissionEnquiries = await productsModel.find(
+    const admissionEnquiries = await compaignModel.find(
       query ? { school: query } : {}
     )
       .sort({ created_at: -1 })
       .skip(startIndex)
       .limit(limit);
 
-    const count = await productsModel.countDocuments(
+    const count = await compaignModel.countDocuments(
       query ? { school: query } : {}
     );
 
@@ -86,4 +85,4 @@ const getAllProducts = async (req, res) => {
   }
 };
 
-export { createProducts, deleteProducts, UpdateProducts, getAllProducts };
+export { createCompaign, deleteCompaign, UpdateCompaign, getAllCompaign };
