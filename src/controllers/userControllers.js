@@ -157,8 +157,7 @@ const updateUserRole = async (req, res) => {
     }
 
     return res.status(200).send({
-      message: "User role updated successfully",
-      data: updatedUser,
+      message: "User role updated successfully"
     });
   } catch (error) {
     return res.status(500).send(error.message);
