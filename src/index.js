@@ -8,6 +8,7 @@ import productRoutes from "./routes/productsRoutes.js";
 import donationRoutes from "./routes/donationRoutes.js";
 import blogRoutes from "./routes/blogRoutes.js";
 import eventRoutes from "./routes/eventRoutes.js";
+import campaignRoutes from "./routes/campaignRoutes.js";
 // Application
 const app = express();
 dotenv.config();
@@ -29,6 +30,7 @@ app.use("/api/v1/products/", productRoutes);
 app.use("/api/v1/donation/", donationRoutes);
 app.use("/api/v1/blog/", blogRoutes);
 app.use("/api/v1/event/", eventRoutes);
+app.use("/api/v1/campaign/", campaignRoutes);
 
 // Handle Not valid routes
 app.use("*", (req, res) => {
