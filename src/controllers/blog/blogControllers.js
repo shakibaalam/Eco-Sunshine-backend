@@ -1,20 +1,16 @@
 import BlogModel from "../../models/blogs.js";
-import UserModel from "../../models/userModels.js";
-
-
 
 const createBlog = async (req, res) => {
   try {
-    const user = req.user_id
-    const userDetails = await UserModel.findById(user)
+    const today = new Date();
     const result = new BlogModel({
       title: req.body.title,
       img: req.body.img,
       content: req.body.content,
-      date: req.body.date,
+      date: today,
       views: req.body.views,
       comments: req.body.comments,
-      author: req.body.comments,
+      author: req.body.author,
     });
     await result.validate();
     await result.save();

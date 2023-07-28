@@ -147,19 +147,15 @@ const updateUserRole = async (req, res) => {
     const { id } = req.params;
     const { role } = req.body;
 
-    console.log(`Updating user role for user with ID: ${id}`);
-
     const updatedUser = await UserModel.updateOne(
-      { _id: id }, 
+      { _id: id },
       { $set: { role } }
     );
 
     if (updatedUser.n === 0) {
-      console.log(`User with ID: ${id} not found`);
       return res.status(404).send("User not found");
     }
 
-    console.log(`User role updated successfully for user with ID: ${id}`);
     return res.status(200).send({
       message: "User role updated successfully"
     });
