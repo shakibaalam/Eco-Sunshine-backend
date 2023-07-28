@@ -18,6 +18,10 @@ const compaignSchema = new mongoose.Schema({
     type: String,
     required: [true, "endDate is required!"],
   },
+  startDate: {
+    type: String,
+    required: [true, "startDate is required!"],
+  },
   img: {
     type: String,
     required: [true, "img is required!"],
