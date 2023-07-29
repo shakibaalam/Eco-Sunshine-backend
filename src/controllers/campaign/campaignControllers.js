@@ -8,6 +8,7 @@ const createCompaign = async (req, res) => {
       des: req.body.des,
       targetAmount: req.body.targetAmount,
       endDate: req.body.endDate,
+      startDate: req.body.startDate,
       img: req.body.img,
     });
     await result.validate();

@@ -1,9 +1,9 @@
-import DonationModel from "../../model/donation.js";
 
+import productsModel from "../../models/products.js";
 
 const createDonation = async (req, res) => {
   try {
-    const result = new DonationModel({
+    const result = new productsModel({
       name: req.body.name,
       des: req.body.des,
       price: req.body.price,
@@ -19,12 +19,12 @@ const createDonation = async (req, res) => {
 
 const deleteDonation = async (req, res) => {
   try {
-    if (!(await DonationModel.findById(req.params.id))) {
+    if (!(await productsModel.findById(req.params.id))) {
       return res.status(400).send({
         message: "Invalid Id!",
       });
     }
-    await DonationModel.findByIdAndDelete(req.params.id);
+    await productsModel.findByIdAndDelete(req.params.id);
 
     return res.status(200).send({
       message: "Success",
@@ -36,7 +36,7 @@ const deleteDonation = async (req, res) => {
 };
 const UpdateDonation = async (req, res) => {
   try {
-    const visitorBook = await DonationModel.findByIdAndUpdate(
+    const visitorBook = await productsModel.findByIdAndUpdate(
       req.params.id,
       req.body,
       { new: true }
@@ -53,21 +53,21 @@ const UpdateDonation = async (req, res) => {
 const getAllDonation = async (req, res) => {
   try {
     if (req.params.id) {
-      const admissionEnquiries = await DonationModel.findById(req.params.id);
+      const admissionEnquiries = await productsModel.findById(req.params.id);
       return res.status(200).send(admissionEnquiries);
     }
     const query = req.query.school;
     const page = parseInt(req.query.page) || 1;
     const limit = parseInt(req.query.limit) || 200;
     const startIndex = (page - 1) * limit;
-    const admissionEnquiries = await DonationModel.find(
+    const admissionEnquiries = await productsModel.find(
       query ? { school: query } : {}
     )
       .sort({ created_at: -1 })
       .skip(startIndex)
       .limit(limit);
 
-    const count = await DonationModel.countDocuments(
+    const count = await productsModel.countDocuments(
       query ? { school: query } : {}
     );
 
