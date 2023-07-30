@@ -36,6 +36,10 @@ const addToCartSchema = new mongoose.Schema({
   img: {
     type: String,
     required: [true, "img name is required!"],
+  },
+  paymentConfirm: {
+    type: String,
+    required: false,
   }
 });
 
