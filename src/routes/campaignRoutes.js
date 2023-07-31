@@ -9,7 +9,7 @@ const router = Router();
 router.post("/create-campaign",checkAdmin, createCompaign );
 router.delete("/delete-campaign/:id", checkAdmin, deleteCompaign);
 router.patch("/update-campaign/:id",checkAdmin, UpdateCompaign);
-router.get("/get-campaign",checkAuthUser, getAllCompaign);
+router.get("/get-campaign", getAllCompaign);
 router.get("/get-campaign/:id",checkAuthUser, getAllCompaign);
 
 

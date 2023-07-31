@@ -10,7 +10,7 @@ router.post("/create-blog",checkAdmin,  createBlog);
 router.delete("/delete-blog/:id",checkAdmin,  deleteBlog);
 router.patch("/update-blog/:id",checkAdmin,  UpdateBlog);
 router.get("/get-blog/:id",checkAuthUser, getAllBlog );
-router.get("/get-blog",checkAuthUser, getAllBlog);
+router.get("/get-blog", getAllBlog);
 
 // exporting
 export default router;

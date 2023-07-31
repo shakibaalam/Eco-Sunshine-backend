@@ -11,7 +11,7 @@ const router = Router();
 router.post("/create-product", checkAdmin, createProducts);
 router.delete("/delete-product/:id", checkAdmin, deleteProducts);
 router.patch("/update-product/:id", checkAdmin, UpdateProducts);
-router.get("/get-product", checkAuthUser, getAllProducts);
+router.get("/get-product", getAllProducts);
 router.get("/get-product/:id", checkAuthUser, getAllProducts);
 
 // add to cart router
@@ -21,7 +21,7 @@ router.patch("/update-to-cart/:id", checkAuthUser, UpdateAddToCart);
 router.get("/get-to-cart", checkAuthUser, getAllAddToCart);
 router.get("/get-to-cart/:id", checkAuthUser, getAllAddToCart);
 
-router.post("/create-customar",checkAuthUser, customarStripeAccount);
-router.post("/payment-recive",checkAuthUser, paymentRecive);
+router.post("/create-customer",checkAuthUser, customarStripeAccount);
+router.post("/payment-receive",checkAuthUser, paymentRecive);
 // exporting
 export default router;

@@ -10,7 +10,7 @@ router.post("/create-event",checkAdmin,  createAddEvent);
 router.delete("/delete-event/:id",checkAdmin,  deleteEvent);
 router.patch("/update-event/:id",checkAdmin,  UpdateEvent);
 router.get("/get-event/:id",checkAuthUser, getAllAddEvent );
-router.get("/get-event",checkAuthUser, getAllAddEvent);
+router.get("/get-event", getAllAddEvent);
 
 // exporting
 export default router;
