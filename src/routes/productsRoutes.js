@@ -23,6 +23,6 @@ router.get("/get-to-cart/:id", checkAuthUser, getAllAddToCart);
 
 router.post("/create-customer",checkAuthUser, customarStripeAccount);
 router.post("/payment-receive",checkAuthUser, paymentRecive);
-router.get("/get-confirm-pay-product",checkAdmin, getAllPay);
+router.get("/get-confirm-pay-product",checkAuthUser, getAllPay);
 // exporting
 export default router;

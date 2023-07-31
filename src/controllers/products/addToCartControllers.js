@@ -1,13 +1,12 @@
 import addToCartModel from "../../models/addToCart.js";
 import productsModel from "../../models/products.js";
 
-
 const createAddToCart = async (req, res) => {
   try {
-    const product = req.params.id
-    const productsDetails = await productsModel.findById(product)
+    const product = req.params.id;
+    const productsDetails = await productsModel.findById(product);
     console.log(productsDetails);
-    const user = req.user_id
+    const user = req.user_id;
     const result = new addToCartModel({
       name: productsDetails.name,
       price: productsDetails.price,
@@ -68,7 +67,6 @@ const UpdateAddToCart = async (req, res) => {
 //       { user }
 //     )
 
-
 //     return res.status(200).send({
 //       data: product
 //     });
@@ -99,9 +97,25 @@ const getAllAddToCart = async (req, res) => {
   }
 };
 
+// const getAllPay = async (req, res) => {
+//   try {
+//     const product = await addToCartModel.find({ paymentConfirm: true });
+
+//     return res.status(200).send({
+//       data: product,
+//     });
+//   } catch (error) {
+//     return res.status(500).send(error.message);
+//   }
+// };
 const getAllPay = async (req, res) => {
   try {
-    const product = await addToCartModel.find({ paymentConfirm: true });
+    const user = req.user_id;
+
+    const product = await addToCartModel.find({
+      user,
+      paymentConfirm: true,
+    });
 
     return res.status(200).send({
       data: product,
@@ -111,5 +125,10 @@ const getAllPay = async (req, res) => {
   }
 };
 
-
-export { createAddToCart, deleteAddToCart, UpdateAddToCart, getAllAddToCart, getAllPay };
+export {
+  createAddToCart,
+  deleteAddToCart,
+  UpdateAddToCart,
+  getAllAddToCart,
+  getAllPay,
+};
