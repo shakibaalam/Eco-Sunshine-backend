@@ -57,24 +57,59 @@ const UpdateAddToCart = async (req, res) => {
   }
 };
 
+// const getAllAddToCart = async (req, res) => {
+//   try {
+//     const user = req.user_id
+//     if (req.params.id) {
+//       const product = await addToCartModel.findById(req.params.id);
+//       return res.status(200).send(product);
+//     }
+//     const product = await addToCartModel.find(
+//       { user }
+//     )
+
+
+//     return res.status(200).send({
+//       data: product
+//     });
+//   } catch (error) {
+//     return res.status(500).send(error.message);
+//   }
+// };
+
 const getAllAddToCart = async (req, res) => {
   try {
-    const user = req.user_id
-    if (req.params.id) {
-      const admissionEnquiries = await addToCartModel.findById(req.params.id);
-      return res.status(200).send(admissionEnquiries);
-    }
-    const admissionEnquiries = await addToCartModel.find(
-      { user }
-    )
+    const user = req.user_id;
 
+    if (req.params.id) {
+      const product = await addToCartModel.findById(req.params.id);
+      return res.status(200).send(product);
+    }
+
+    const product = await addToCartModel.find({
+      user,
+      paymentConfirm: { $ne: true },
+    });
 
     return res.status(200).send({
-      data: admissionEnquiries
+      data: product,
     });
   } catch (error) {
     return res.status(500).send(error.message);
   }
 };
 
-export { createAddToCart, deleteAddToCart, UpdateAddToCart, getAllAddToCart };
+const getAllPay = async (req, res) => {
+  try {
+    const product = await addToCartModel.find({ paymentConfirm: true });
+
+    return res.status(200).send({
+      data: product,
+    });
+  } catch (error) {
+    return res.status(500).send(error.message);
+  }
+};
+
+
+export { createAddToCart, deleteAddToCart, UpdateAddToCart, getAllAddToCart, getAllPay };

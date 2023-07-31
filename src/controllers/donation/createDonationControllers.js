@@ -22,14 +22,14 @@ const createCDonation = async (req, res) => {
 const getAllCDonation = async (req, res) => {
   try {
     if (req.params.id) {
-      const admissionEnquiries = await CreateDonationModel.findById(req.params.id);
-      return res.status(200).send(admissionEnquiries);
+      const product = await CreateDonationModel.findById(req.params.id);
+      return res.status(200).send(product);
     }
     const query = req.query.school;
     const page = parseInt(req.query.page) || 1;
     const limit = parseInt(req.query.limit) || 200;
     const startIndex = (page - 1) * limit;
-    const admissionEnquiries = await CreateDonationModel.find(
+    const product = await CreateDonationModel.find(
       query ? { school: query } : {}
     )
       .sort({ created_at: -1 })
@@ -41,7 +41,7 @@ const getAllCDonation = async (req, res) => {
     );
 
     return res.status(200).send({
-      data: admissionEnquiries,
+      data: product,
       pagination: {
         currentPage: page,
         totalPages: Math.ceil(count / limit),

@@ -133,9 +133,9 @@ const login = async (req, res) => {
 const getAllUser = async (req, res) => {
   try {
     const user = req.user_id
-    const admissionEnquiries = await UserModel.find({})
+    const product = await UserModel.find({})
     return res.status(200).send({
-      data: admissionEnquiries
+      data: product
     });
   } catch (error) {
     return res.status(500).send(error.message);

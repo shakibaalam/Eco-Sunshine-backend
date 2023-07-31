@@ -1,7 +1,7 @@
 // imports
 import { Router } from "express";
 import { UpdateProducts, createProducts, deleteProducts, getAllProducts } from "../controllers/donation/donationControllers.js";
-import { UpdateAddToCart, createAddToCart, deleteAddToCart, getAllAddToCart } from "../controllers/products/addToCartControllers.js";
+import { UpdateAddToCart, createAddToCart, deleteAddToCart, getAllAddToCart, getAllPay } from "../controllers/products/addToCartControllers.js";
 import { checkAuthUser, checkAdmin } from "../middleware/authMiddleware.js"
 import { customarStripeAccount, paymentRecive } from "../controllers/payment/paymentControllers.js";
 // router
@@ -23,5 +23,6 @@ router.get("/get-to-cart/:id", checkAuthUser, getAllAddToCart);
 
 router.post("/create-customer",checkAuthUser, customarStripeAccount);
 router.post("/payment-receive",checkAuthUser, paymentRecive);
+router.get("/get-confirm-pay-product",checkAdmin, getAllPay);
 // exporting
 export default router;
