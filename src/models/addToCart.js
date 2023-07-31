@@ -27,11 +27,11 @@ const addToCartSchema = new mongoose.Schema({
   },
   price: {
     type: String,
-    required: [true, "price name is required!"],
+    required: false,
   },
   quantity: {
     type: String,
-    required: [true, "price name is required!"],
+    required: false,
   },
   img: {
     type: String,
