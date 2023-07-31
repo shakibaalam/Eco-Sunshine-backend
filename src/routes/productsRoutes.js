@@ -1,18 +1,9 @@
 // imports
 import { Router } from "express";
-import {
-  UpdateProducts,
-  createProducts,
-  deleteProducts,
-  getAllProducts,
-} from "../controllers/donation/donationControllers.js";
-import {
-  UpdateAddToCart,
-  createAddToCart,
-  deleteAddToCart,
-  getAllAddToCart,
-} from "../controllers/products/addToCartControllers.js";
-import { checkAuthUser, checkAdmin } from "../middleware/authMiddleware.js";
+import { UpdateProducts, createProducts, deleteProducts, getAllProducts } from "../controllers/donation/donationControllers.js";
+import { UpdateAddToCart, createAddToCart, deleteAddToCart, getAllAddToCart } from "../controllers/products/addToCartControllers.js";
+import { checkAuthUser, checkAdmin } from "../middleware/authMiddleware.js"
+import { customarStripeAccount, paymentRecive } from "../controllers/payment/paymentControllers.js";
 // router
 const router = Router();
 
@@ -30,5 +21,7 @@ router.patch("/update-to-cart/:id", checkAuthUser, UpdateAddToCart);
 router.get("/get-to-cart", checkAuthUser, getAllAddToCart);
 router.get("/get-to-cart/:id", checkAuthUser, getAllAddToCart);
 
+router.post("/create-customar",checkAuthUser, customarStripeAccount);
+router.post("/payment-recive",checkAuthUser, paymentRecive);
 // exporting
 export default router;
