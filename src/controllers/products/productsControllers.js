@@ -1,13 +1,15 @@
 
 import productsModel from "../../models/products.js";
 
-const createDonation = async (req, res) => {
+const createProduct = async (req, res) => {
   try {
     const result = new productsModel({
       name: req.body.name,
       des: req.body.des,
       price: req.body.price,
       img: req.body.img,
+      minimumQu: req.body.minimumQu,
+      availableQu: req.body.availableQu,
     });
     await result.validate();
     await result.save();
@@ -17,7 +19,7 @@ const createDonation = async (req, res) => {
   }
 };
 
-const deleteDonation = async (req, res) => {
+const deleteProduct = async (req, res) => {
   try {
     if (!(await productsModel.findById(req.params.id))) {
       return res.status(400).send({
@@ -34,7 +36,7 @@ const deleteDonation = async (req, res) => {
     return res.status(400).send(error);
   }
 };
-const UpdateDonation = async (req, res) => {
+const UpdateProduct = async (req, res) => {
   try {
     const visitorBook = await productsModel.findByIdAndUpdate(
       req.params.id,
@@ -50,7 +52,7 @@ const UpdateDonation = async (req, res) => {
   }
 };
 
-const getAllDonation = async (req, res) => {
+const getAllProduct = async (req, res) => {
   try {
     if (req.params.id) {
       const product = await productsModel.findById(req.params.id);
@@ -84,4 +86,4 @@ const getAllDonation = async (req, res) => {
   }
 };
 
-export { createDonation, deleteDonation, UpdateDonation, getAllDonation };
+export { createProduct, deleteProduct, UpdateProduct, getAllProduct };

@@ -1,18 +1,19 @@
 // imports
 import { Router } from "express";
-import { UpdateProducts, createProducts, deleteProducts, getAllProducts } from "../controllers/donation/donationControllers.js";
+
 import { UpdateAddToCart, createAddToCart, deleteAddToCart, getAllAddToCart, getAllPay } from "../controllers/products/addToCartControllers.js";
 import { checkAuthUser, checkAdmin } from "../middleware/authMiddleware.js"
 import { customarStripeAccount, paymentRecive } from "../controllers/payment/paymentControllers.js";
+import { UpdateProduct, createProduct, deleteProduct, getAllProduct } from "../controllers/products/productsControllers.js";
 // router
 const router = Router();
 
 // add product router
-router.post("/create-product", checkAdmin, createProducts);
-router.delete("/delete-product/:id", checkAdmin, deleteProducts);
-router.patch("/update-product/:id", checkAdmin, UpdateProducts);
-router.get("/get-product", getAllProducts);
-router.get("/get-product/:id", checkAuthUser, getAllProducts);
+router.post("/create-product", checkAdmin, createProduct);
+router.delete("/delete-product/:id", checkAdmin, deleteProduct);
+router.patch("/update-product/:id", checkAdmin, UpdateProduct);
+router.get("/get-product", getAllProduct);
+router.get("/get-product/:id", checkAuthUser, getAllProduct);
 
 // add to cart router
 router.post("/add-to-cart/:id", checkAuthUser, createAddToCart);

@@ -1,7 +1,7 @@
 import mongoose from "mongoose";
 
 const DonationSchema = new mongoose.Schema({
-    title: {
+  title: {
     type: String,
     required: [true, "title id required!"],
   },

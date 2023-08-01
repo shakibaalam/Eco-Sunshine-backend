@@ -1,15 +1,16 @@
-import productsModel from "../../models/products.js";
+
+import DonationModel from "../../models/donation.js";
 
 
-const createProducts = async (req, res) => {
+const createDonation = async (req, res) => {
   try {
-    const result = new productsModel({
-      name: req.body.name,
+    const result = new DonationModel({
+      title: req.body.title,
       img: req.body.img,
-      des: req.body.des,
-      price: req.body.price,
-      availableQu: req.body.availableQu,
-      minimumQu: req.body.minimumQu,
+      para: req.body.para,
+      fund: req.body.fund,
+      days: req.body.days,
+      goal: req.body.goal,
     });
     await result.validate();
     await result.save();
@@ -19,14 +20,14 @@ const createProducts = async (req, res) => {
   }
 };
 
-const deleteProducts = async (req, res) => {
+const deleteDonationcreateDonation = async (req, res) => {
   try {
-    if (!(await productsModel.findById(req.params.id))) {
+    if (!(await DonationModel.findById(req.params.id))) {
       return res.status(400).send({
         message: "Invalid Id!",
       });
     }
-    await productsModel.findByIdAndDelete(req.params.id);
+    await DonationModel.findByIdAndDelete(req.params.id);
 
     return res.status(200).send({
       message: "Success",
@@ -36,9 +37,9 @@ const deleteProducts = async (req, res) => {
     return res.status(400).send(error);
   }
 };
-const UpdateProducts = async (req, res) => {
+const UpdateDonationcreateDonation = async (req, res) => {
   try {
-    const visitorBook = await productsModel.findByIdAndUpdate(
+    const visitorBook = await DonationModel.findByIdAndUpdate(
       req.params.id,
       req.body,
       { new: true }
@@ -52,24 +53,24 @@ const UpdateProducts = async (req, res) => {
   }
 };
 
-const getAllProducts = async (req, res) => {
+const getAllDonationcreateDonation = async (req, res) => {
   try {
     if (req.params.id) {
-      const product = await productsModel.findById(req.params.id);
+      const product = await DonationModel.findById(req.params.id);
       return res.status(200).send(product);
     }
     const query = req.query.school;
     const page = parseInt(req.query.page) || 1;
     const limit = parseInt(req.query.limit) || 200;
     const startIndex = (page - 1) * limit;
-    const product = await productsModel.find(
+    const product = await DonationModel.find(
       query ? { school: query } : {}
     )
       .sort({ created_at: -1 })
       .skip(startIndex)
       .limit(limit);
 
-    const count = await productsModel.countDocuments(
+    const count = await DonationModel.countDocuments(
       query ? { school: query } : {}
     );
 
@@ -86,4 +87,4 @@ const getAllProducts = async (req, res) => {
   }
 };
 
-export { createProducts, deleteProducts, UpdateProducts, getAllProducts };
+export { createDonation, deleteDonationcreateDonation, UpdateDonationcreateDonation, getAllDonationcreateDonation };
