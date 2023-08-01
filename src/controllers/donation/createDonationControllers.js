@@ -59,4 +59,22 @@ const getAllUserDonation = async (req, res) => {
   }
 };
 
-export { createCDonation, getAllCDonation, getAllUserDonation };
+const getAllPay = async (req, res) => {
+  try {
+    const user = req.user_id;
+
+    const product = await CreateDonationModel.find({
+      user,
+      paymentConfirm: true,
+    });
+
+    return res.status(200).send({
+      data: product,
+    });
+  } catch (error) {
+    return res.status(500).send(error.message);
+  }
+};
+
+
+export { createCDonation, getAllCDonation, getAllUserDonation, getAllPay };

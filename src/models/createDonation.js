@@ -28,6 +28,10 @@ const donationSchema = new mongoose.Schema({
   fund: {
     type: String,
     required: [true, "fund name is required!"],
+  },
+  paymentConfirm: {
+    type: String,
+    required: false,
   }
 });
 
