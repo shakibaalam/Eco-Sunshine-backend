@@ -9,6 +9,7 @@ import {
 } from "../controllers/event/eventControllers.js";
 import {
   deleteRegEvent,
+  getAllRegEventUser,
   getRegEvent,
   getRegEventUser,
   registerEvent,
@@ -27,9 +28,9 @@ router.get("/get-event", getAllAddEvent);
 router.post("/create-event-reg", checkAuthUser, registerEvent);
 router.delete("/delete-reg-event/:id", checkAuthUser, deleteRegEvent);
 router.patch("/update-reg-event/:id", checkAuthUser, updateRegEvent);
-router.get("/get-reg-event/:id", checkAuthUser, getRegEvent);
+router.get("/get-reg-event/:id", checkAuthUser, getRegEventUser);
 router.get("/get-reg-event", checkAuthUser, getRegEventUser);
-router.get("/get-allReg-event", checkAdmin, getRegEvent);
+router.get("/get-allReg-event", checkAdmin, getAllRegEventUser);
 
 // exporting
 export default router;

@@ -2,6 +2,7 @@ import EventRegModel from "../../models/eventRetester.js";
 
 const registerEvent = async (req, res) => {
   try {
+    const user = req.user_id
     const result = new EventRegModel({
       name: req.body.name,
       email: req.body.email,
@@ -14,6 +15,7 @@ const registerEvent = async (req, res) => {
       des: req.body.des,
       title: req.body.title,
       image: req.body.image,
+      user,
     });
     await result.validate();
     await result.save();
@@ -39,16 +41,11 @@ const getRegEvent = async (req, res) => {
       .limit(limit);
 
     const count = await EventRegModel.countDocuments(
-      query ? { school: query } : {}
+     {}
     );
 
     return res.status(200).send({
       data: product,
-      pagination: {
-        currentPage: page,
-        totalPages: Math.ceil(count / limit),
-        totalItems: count,
-      },
     });
   } catch (error) {
     return res.status(500).send(error.message);
@@ -68,29 +65,35 @@ const getRegEventUser = async (req, res) => {
       return res.status(200).send(product);
     }
 
-    const query = req.query.school;
-    const page = parseInt(req.query.page) || 1;
-    const limit = parseInt(req.query.limit) || 200;
-    const startIndex = (page - 1) * limit;
 
     const product = await EventRegModel.find(
-      query ? { school: query, user: user } : { user: user } // Filter by the logged-in user ID
+     { user: user } // Filter by the logged-in user ID
     )
-      .sort({ created_at: -1 })
-      .skip(startIndex)
-      .limit(limit);
-
-    const count = await EventRegModel.countDocuments(
-      query ? { school: query, user: user } : { user: user } // Filter by the logged-in user ID
-    );
+    
 
     return res.status(200).send({
       data: product,
-      pagination: {
-        currentPage: page,
-        totalPages: Math.ceil(count / limit),
-        totalItems: count,
-      },
+    });
+  } catch (error) {
+    return res.status(500).send(error.message);
+  }
+};
+const getAllRegEventUser = async (req, res) => {
+  try {
+    if (req.params.id) {
+      // Assuming that req.params.id refers to the event ID
+      const product = await EventRegModel.findOne({
+        _id: req.params.id,
+      });
+      return res.status(200).send(product);
+    }
+
+
+    const product = await EventRegModel.find({})
+    
+
+    return res.status(200).send({
+      data: product,
     });
   } catch (error) {
     return res.status(500).send(error.message);
@@ -130,4 +133,4 @@ const updateRegEvent = async (req, res) => {
   }
 };
 
-export { registerEvent, getRegEvent, deleteRegEvent, updateRegEvent,getRegEventUser };
+export { registerEvent, getRegEvent, deleteRegEvent, updateRegEvent,getRegEventUser ,getAllRegEventUser};
