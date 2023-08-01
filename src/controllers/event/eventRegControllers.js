@@ -72,9 +72,9 @@ const getRegEventUser = async (req, res) => {
 
     const products = await EventRegModel.find({ user: user });
 
-    if (!products || products.length === 0) {
-      return res.status(404).send("No event registrations found for the user.");
-    }
+    // if (!products || products.length === 0) {
+    //   return res.status(404).send("No event registrations found for the user.");
+    // }
 
     return res.status(200).send({
       data: products,
