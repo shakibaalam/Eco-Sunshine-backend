@@ -55,6 +55,11 @@ const EventRegSchema = new mongoose.Schema({
     type: String,
     required: false,
   },
+  user: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'User',
+    required: true,
+  },
 });
 
 const EventRegModel = mongoose.model("EventReg", EventRegSchema);

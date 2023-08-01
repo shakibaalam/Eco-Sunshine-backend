@@ -62,22 +62,29 @@ const getRegEventUser = async (req, res) => {
         _id: req.params.id,
         user: user, // Filter by the logged-in user ID
       });
+
+      if (!product) {
+        return res.status(404).send("Event registration not found.");
+      }
+
       return res.status(200).send(product);
     }
 
+    const products = await EventRegModel.find({ user: user });
 
-    const product = await EventRegModel.find(
-     { user: user } // Filter by the logged-in user ID
-    )
-    
+    if (!products || products.length === 0) {
+      return res.status(404).send("No event registrations found for the user.");
+    }
 
     return res.status(200).send({
-      data: product,
+      data: products,
     });
   } catch (error) {
-    return res.status(500).send(error.message);
+    console.error("Error while fetching event registrations:", error);
+    return res.status(500).send("Internal server error.");
   }
 };
+
 const getAllRegEventUser = async (req, res) => {
   try {
     if (req.params.id) {
