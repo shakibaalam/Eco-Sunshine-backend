@@ -40,5 +40,23 @@ const getAllCDonation = async (req, res) => {
     return res.status(500).send(error.message);
   }
 };
+const getAllUserDonation = async (req, res) => {
+  try {
+    if (req.params.id) {
+      const product = await CreateDonationModel.findById(req.params.id);
+      return res.status(200).send(product);
+    }
+    const product = await CreateDonationModel.find(
+      {}
+    )
 
-export { createCDonation, getAllCDonation };
+
+    return res.status(200).send({
+      data: product
+    });
+  } catch (error) {
+    return res.status(500).send(error.message);
+  }
+};
+
+export { createCDonation, getAllCDonation, getAllUserDonation };

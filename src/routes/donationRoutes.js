@@ -1,7 +1,7 @@
 // imports
 import { Router } from "express";
 import { UpdateDonationcreateDonation, createDonation,  deleteDonationcreateDonation,  getAllDonationcreateDonation } from "../controllers/donation/donationControllers.js";
-import { createCDonation, getAllCDonation } from "../controllers/donation/createDonationControllers.js";
+import { createCDonation, getAllCDonation, getAllUserDonation } from "../controllers/donation/createDonationControllers.js";
 import { checkAuthUser, checkAdmin } from "../middleware/authMiddleware.js"
 // router
 const router = Router();
@@ -17,6 +17,7 @@ router.get("/get-donation/:id",checkAuthUser, getAllDonationcreateDonation);
 router.post("/create-user-donation/:id",checkAuthUser, createCDonation);
 router.get("/get-user-donation",checkAuthUser, getAllCDonation);
 router.get("/get-user-donation/:id",checkAuthUser, getAllCDonation);
+router.get("/get-all-user-donation",checkAdmin, getAllUserDonation);
 
 // exporting
 export default router;
